@@ -16,11 +16,11 @@
 
 package io.apicurio.registry.demo.simple.json;
 
-import io.apicurio.registry.client.RegistryClient;
 import io.apicurio.registry.client.RegistryService;
 import io.apicurio.registry.rest.beans.ArtifactMetaData;
 import io.apicurio.registry.rest.beans.IfExistsType;
 import io.apicurio.registry.types.ArtifactType;
+import io.registry.client.CompatibleClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +45,7 @@ public class SimpleJsonSchemaBootstrapper {
     static {
         // Create a Service Registry client
         String registryUrl = "http://localhost:8080/api";
-        service = RegistryClient.create(registryUrl);
+        service = CompatibleClient.createCompatible(registryUrl);
     }
     
     public static final void main(String [] args) throws Exception {

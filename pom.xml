@@ -10,7 +10,7 @@
   <description>Apicurio Service Registry Demo</description>
 
   <properties>
-    <registry.version>1.2.2.Final</registry.version>
+    <registry.version>1.2.3-client-demo-SNAPSHOT</registry.version>
     <avro.version>1.9.2</avro.version>
     <protobuf.version>3.11.1</protobuf.version>
     <slf4j.version>1.7.25</slf4j.version>

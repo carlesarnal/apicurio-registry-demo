@@ -1,6 +1,5 @@
 package io.apicurio.registry.demo;
 
-import io.apicurio.registry.client.RegistryClient;
 import io.apicurio.registry.client.RegistryService;
 import io.apicurio.registry.demo.domain.Log;
 import io.apicurio.registry.demo.domain.LogInput;
@@ -9,6 +8,7 @@ import io.apicurio.registry.demo.utils.ProtoSerde;
 import io.apicurio.registry.utils.serde.AvroKafkaDeserializer;
 import io.apicurio.registry.utils.serde.AvroKafkaSerializer;
 import io.apicurio.registry.utils.serde.avro.DefaultAvroDatumProvider;
+import io.registry.client.CompatibleClient;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.common.config.TopicConfig;
 import org.apache.kafka.common.serialization.Deserializer;
@@ -58,7 +58,7 @@ public class ApplicationImpl implements Lifecycle {
         );
 
         String registryUrl = property(properties, "registry.url", "http://localhost:8080/api");
-        RegistryService service = RegistryClient.cached(registryUrl);
+        RegistryService service = CompatibleClient.createCompatible(registryUrl);
 
         StreamsBuilder builder = new StreamsBuilder();
 

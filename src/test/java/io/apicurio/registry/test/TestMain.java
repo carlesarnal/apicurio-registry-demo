@@ -1,6 +1,5 @@
 package io.apicurio.registry.test;
 
-import io.apicurio.registry.client.RegistryClient;
 import io.apicurio.registry.client.RegistryService;
 import io.apicurio.registry.demo.ApplicationImpl;
 import io.apicurio.registry.demo.domain.LogInput;
@@ -12,6 +11,7 @@ import io.apicurio.registry.utils.serde.AbstractKafkaSerDe;
 import io.apicurio.registry.utils.serde.AbstractKafkaSerializer;
 import io.apicurio.registry.utils.serde.AvroKafkaSerializer;
 import io.apicurio.registry.utils.serde.strategy.FindLatestIdStrategy;
+import io.registry.client.CompatibleClient;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -38,7 +38,7 @@ public class TestMain {
 
         // register schema
         String registryUrl_1 = PropertiesUtil.property(properties, "registry.url.1", "http://localhost:8080/api"); // register against 1st node
-        try (RegistryService service = RegistryClient.create(registryUrl_1)) {
+        try (RegistryService service = CompatibleClient.createCompatible(registryUrl_1)) {
             String artifactId = ApplicationImpl.INPUT_TOPIC + "-value";
             try {
                 service.getArtifactMetaData(artifactId); // check if schema already exists
